@@ -1,3 +1,22 @@
+package example
+
+data class Item(val id: Int, val name: String, var quantity: Int) {
+    override fun toString(): String {
+        return "Предмет: $name | ID: $id | Количество: $quantity"
+    }
+}
+
+class User {
+    var age: Int = 0
+        set(value) {
+            if (value in 0..150) {
+                field = value
+            } else {
+                println("Ошибка: возраст должен быть от 0 до 150")
+            }
+        }
+}
+
 abstract class Human(val name: String) {
     fun hello() {
         println("Привет, я $name")
@@ -44,6 +63,21 @@ class Circle(val radius: Float) : Figure() {
 }
 
 fun main() {
+    val item1 = Item(1, "Меч", 5)
+    val item2 = item1.copy(quantity = 10)
+
+    println(item1)
+    println(item2)
+
+    val (id, name, quantity) = item1
+    println("Декомпозиция: id=$id, name=$name, quantity=$quantity")
+
+    val user = User()
+    user.age = 25
+    println("Возраст: ${user.age}")
+    user.age = 200
+    println("Возраст: ${user.age}")
+
     val programmer = Programmer("Анна")
     programmer.hello()
     programmer.work()
